@@ -14,8 +14,9 @@ namespace Register
 {
     public partial class User : Form
     {
-
+        MySqlConnection connection = connectionDB.GetConnection();
         string connectionString = "server=localhost;database=queue_db;uid=eunice;pwd=password123;";
+        
         public User()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace Register
 
         private void LoadData()
         {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(connectionDB.connectionString))
             {
                 string query = "SELECT name, contact FROM live_queue"; // Adjust column and table names
                 MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
